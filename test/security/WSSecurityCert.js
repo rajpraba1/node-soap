@@ -56,7 +56,7 @@ describe('WSSecurityCert', function() {
     xml.should.containEql('<wsse:Reference URI="#' + instance.x509Id);
     xml.should.containEql('ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>');
     xml.should.containEql(instance.publicP12PEM);
-    xml.should.containEql(instance.signer.getSignatureXml());
+    xml.should.containEql(instance.signer.getSignatureXml().replace(/[\r\n]/g, ''));
   });
   
   it('should insert a WSSecurity signing block when postProcess is called (private key is protected by a passphrase)', function() {
@@ -80,7 +80,7 @@ describe('WSSecurityCert', function() {
     xml.should.containEql('<wsse:Reference URI="#' + instance.x509Id);
     xml.should.containEql('ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3"/>');
     xml.should.containEql(instance.publicP12PEM);
-    xml.should.containEql(instance.signer.getSignatureXml());
+    xml.should.containEql(instance.signer.getSignatureXml().replace(/[\r\n]/g, ''));
   });
 
   it('should only add two Reference elements, for Soap Body and Timestamp inside wsse:Security element', function() {
